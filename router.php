@@ -2,6 +2,7 @@
 /*
  * This is router for built-in php server. It is designed to use only for testing
  * This frees us from installing apache or nginx in travis
+ * Usage: $ php -S 0.0.0.0:12000 router.php
  */
 
 $root = $_SERVER['DOCUMENT_ROOT'];
@@ -27,7 +28,7 @@ if(file_exists( $root.$path )) {
         header("Location: $filename");
         exit();
       }
-      $requestfile = $filename;
+      $requestfile = $root.$filename;
       break;
     }
   }
@@ -41,15 +42,16 @@ define('WP_SITEURL', 'http://'.$_SERVER['HTTP_HOST']);
 define('FORCE_SSL_ADMIN', false);
 
 if ( $requestfile ) {
-  if ( is_dir( $root.$requestfile ) && substr( $path, -1 ) !== '/' ) {
+  if ( is_dir( $requestfile ) && substr( $path, -1 ) !== '/' ) {
     header( "Location: $path/" );
     exit;
   }
   if ( strpos( $path, '.php' ) !== false ) {
-    chdir( dirname( $root.$requestfile ) );
-    require_once $root.$requestfile; // If file exists just use it!
-  } elseif(is_dir($root.$requestfile)) {
-    require_once $root.$requestfile.'index.php'; // If this was a folder use index.php instead
+    chdir( dirname( $requestfile ) );
+    require_once basename($requestfile); // If file exists just use it!
+  } elseif(is_dir($requestfile)) {
+    chdir( dirname( $requestfile ) );
+    require_once 'index.php'; // If this was a folder use index.php instead
   } else {
     return false; // This just means to return file as is
   }
