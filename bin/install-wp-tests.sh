@@ -124,8 +124,10 @@ install_db() {
 
 # Install databases with wp-cli
 install_real_wp() {
+  cd $DIR
   download https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar wp-cli.phar
   php wp-cli.phar core install  --url=$WP_TEST_URL --title='Test' --admin_user=$WP_TEST_USER --admin_password=$WP_TEST_USER_PASS --admin_email="$WP_TEST_USER@wordpress.dev" --path=$WP_CORE_DIR
+  php wp-cli.phar plugin activate --all --path=$WP_CORE_DIR
 }
 
 install_rspec_requirements() {
@@ -135,7 +137,7 @@ install_rspec_requirements() {
 
 start_server() {
   # Start it in background
-  php -S 0.0.0.0:$WP_PORT $DIR/router.php &
+  php -S 0.0.0.0:$WP_PORT $DIR/lib/router.php &
 }
 
 install_wp
