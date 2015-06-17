@@ -137,7 +137,7 @@ install_rspec_requirements() {
 
 start_server() {
   # Start it in background
-  php -S 0.0.0.0:$WP_PORT $DIR/lib/router.php &
+  php -S 0.0.0.0:$WP_PORT -t $WP_CORE_DIR $DIR/lib/router.php &
 }
 
 install_wp
