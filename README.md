@@ -90,13 +90,6 @@ script:
 2. Use your plugin name in tests/bootstrap.php: ```define('PLUGIN_NAME')``` & ```define('PLUGIN_FOLDER')```
 3. Add this into your .travis.yml
 
-```
-
-### Custom rspec tests
-1. Copy spec/ folder from this repo into repo root
-2. Add custom tests
-3. Add this into your .travis.yml:
-
 ```yaml
 # This uses newer and faster docker based build system
 sudo: false
