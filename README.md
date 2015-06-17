@@ -10,7 +10,7 @@ Template for using travis in your wordpress projects.
 ```WP_MULTISITE``` use 0 or 1. TODO: this is not working yet
 
 ## Examples
-### Basic: Just dropin following .travis.yml and start using your phantomjs to do basic wordpress testing:
+### Basic: Just drop following .travis.yml in your project and start using your phantomjs to do basic wordpress testing every time you push to github.
 ```yaml
 # This uses newer and faster docker based build system
 sudo: false
