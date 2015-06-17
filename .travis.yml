@@ -21,11 +21,11 @@ matrix:
     - php: nightly
 
 before_script:
-  - git clone https://github.com/Koodimonni/wordpress-test-template wp-tests
-  - bash wp-tests/bin/install-wp-tests.sh test root '' localhost $WP_VERSION
-
   # Install packages locally for this plugin
   - composer install
+  
+  - git clone https://github.com/Koodimonni/wordpress-test-template wp-tests
+  - bash wp-tests/bin/install-wp-tests.sh test root '' localhost $WP_VERSION
 
 script:
   - phpunit

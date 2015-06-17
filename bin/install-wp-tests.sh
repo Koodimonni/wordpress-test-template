@@ -125,7 +125,7 @@ install_db() {
 link_this_project() {
   cd $DIR
   local FOLDER_PATH=$(dirname $DIR)
-  local FOLDER_NAME=$(basename $DIR)
+  local FOLDER_NAME=$(basename $FOLDER_PATH)
   case $WP_PROJECT_TYPE in
     'plugin' )
         ln -s $FOLDER_PATH $WP_CORE_DIR/wp-content/plugins/$FOLDER_NAME
