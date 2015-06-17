@@ -147,7 +147,7 @@ install_real_wp() {
 
 install_rspec_requirements() {
   gem install bundler
-  bundle install --gemfile=$DIR/rspec/Gemfile
+  bundle install --gemfile=$DIR/spec/Gemfile
 }
 
 start_server() {
