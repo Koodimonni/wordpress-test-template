@@ -46,7 +46,7 @@ script:
 
 ```
 
-### Custom rspec tests
+### Example of using custom rspec tests
 1. Copy spec/ folder from this repo into your repo root
 2. Add custom tests
 3. Add this into your .travis.yml
@@ -85,7 +85,7 @@ script:
   - cd spec && bundle exec rspec test.rb
 ```
 
-### Example about using custom phpunit tests
+### Example of using custom phpunit tests
 1. Copy tests/ folder and phpunit.xml from this repo into your repo root
 2. Use your plugin name in tests/bootstrap.php: ```define('PLUGIN_NAME')``` & ```define('PLUGIN_FOLDER')```
 3. Add this into your .travis.yml
