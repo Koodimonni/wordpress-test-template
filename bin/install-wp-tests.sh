@@ -122,6 +122,16 @@ install_db() {
   mysqladmin create $DB_NAME --user="$DB_USER" --password="$DB_PASS" $EXTRA
 }
 
+link_this_project() {
+  local FOLDER_NAME=$(basename $DIR)
+  case $WP_PROJECT_TYPE in
+    'plugin' )
+        ln -s $DIR $WP_CORE_DIR/wp-content/plugins/$FOLDER_NAME;;
+    'theme' )
+        ln -s $DIR $WP_CORE_DIR/wp-content/themes/$FOLDER_NAME;;
+  esac
+}
+
 # Install databases with wp-cli
 install_real_wp() {
   cd $DIR
@@ -144,7 +154,8 @@ start_server() {
 
 install_wp
 install_test_suite
-install_db 
+install_db
+link_this_project
 install_real_wp
 install_rspec_requirements
 start_server
