@@ -123,12 +123,17 @@ install_db() {
 }
 
 link_this_project() {
+  cd $DIR
   local FOLDER_NAME=$(basename $DIR)
   case $WP_PROJECT_TYPE in
     'plugin' )
-        ln -s $DIR $WP_CORE_DIR/wp-content/plugins/$FOLDER_NAME;;
+        ln -s $DIR $WP_CORE_DIR/wp-content/plugins/$FOLDER_NAME
+        php wp-cli.phar plugin activate --all --path=$WP_CORE_DIR
+        ;;
     'theme' )
-        ln -s $DIR $WP_CORE_DIR/wp-content/themes/$FOLDER_NAME;;
+        ln -s $DIR $WP_CORE_DIR/wp-content/themes/$FOLDER_NAME
+        php wp-cli.phar theme activate $FOLDER_NAME --path=$WP_CORE_DIR
+        ;;
   esac
 }
 
@@ -137,7 +142,6 @@ install_real_wp() {
   cd $DIR
   download https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar wp-cli.phar
   php wp-cli.phar core install  --url=$WP_TEST_URL --title='Test' --admin_user=$WP_TEST_USER --admin_password=$WP_TEST_USER_PASS --admin_email="$WP_TEST_USER@wordpress.dev" --path=$WP_CORE_DIR
-  php wp-cli.phar plugin activate --all --path=$WP_CORE_DIR
 }
 
 install_rspec_requirements() {
@@ -155,7 +159,7 @@ start_server() {
 install_wp
 install_test_suite
 install_db
-link_this_project
 install_real_wp
+link_this_project
 install_rspec_requirements
 start_server
