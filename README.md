@@ -4,7 +4,9 @@ Template for using travis in your wordpress projects.
 ### Travis Enviromental variables
 
 ```WP_PROJECT_TYPE``` use 'plugin' or 'theme'
+
 ```WP_VERSION``` use latest or number (eg. 4.0.1)
+
 ```WP_MULTISITE``` use 0 or 1. TODO: this is not working yet
 
 ## Examples
