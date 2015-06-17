@@ -42,11 +42,6 @@ Capybara.register_driver :poltergeist do |app|
    )
 end
 
-# We never test a production site directly in WP-Palvelu
-# Instead we make a clone of the site and redirect queries into the clone.
-# This is done with the cookie found from ENV
-shadow_hash = ENV['CONTAINER'].partition('_').last unless ENV['CONTAINER'].nil?
-
 # Allow overriding target url with ENV $WP_TEST_URL
 # Try to query siteurl with wp-cli
 # This works because we always have just 1 wordpress installation / instance
@@ -64,7 +59,7 @@ uri = URI(target_url)
 
 
 # Test login with real user
-# Either use one from ENVs
+# Either use given in ENVs
 # or create one with wp-cli
 if ENV['WP_TEST_USER'] and ENV['WP_TEST_USER_PASS']
   username = ENV['WP_TEST_USER']
