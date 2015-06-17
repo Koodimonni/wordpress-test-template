@@ -47,7 +47,7 @@ script:
 ```
 
 ### Custom rspec tests
-1. Copy spec/ folder from this repo into repo root
+1. Copy spec/ folder from this repo into your repo root
 2. Add custom tests
 3. Add this into your .travis.yml
 
