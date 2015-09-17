@@ -6,6 +6,10 @@
   convertNoticesToExceptions="true"
   convertWarningsToExceptions="true"
   >
+  <php>
+    <!-- Enter the name of your main plugin file here -->
+    <env name="PLUGIN_FILE" value="plugin.php"/>
+  </php>
   <testsuites>
     <testsuite>
       <directory prefix="test-" suffix=".php">./tests/</directory>
