@@ -134,3 +134,41 @@ script:
   - phpunit
 ```
 
+### Example of validating WordPress PHP coding standards 
+1. Copy spec/ folder from this repo into your repo root
+2. Add this into your .travis.yml
+
+```yaml
+# This uses newer and faster docker based build system
+sudo: false
+
+language: php
+
+notifications:
+  on_success: never
+  on_failure: change
+
+php:
+  - nightly # PHP 7.0
+  - 5.6
+  - 5.5
+  - 5.4
+
+env:
+  - WP_PROJECT_TYPE=plugin WP_VERSION=latest WP_MULTISITE=0 WP_TEST_URL=http://localhost:12000 WP_TEST_USER=test WP_TEST_USER_PASS=test
+
+matrix:
+  allow_failures:
+    - php: nightly
+
+before_script:
+  # Install composer packages before trying to activate themes or plugins
+  # - composer install
+
+  - git clone https://github.com/Koodimonni/wordpress-test-template wp-tests
+  - bash wp-tests/bin/install-wp-tests.sh test root '' localhost $WP_VERSION
+
+script:
+  - phpcs --standard=WordPress ./**/*.php
+```
+
