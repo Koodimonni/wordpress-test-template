@@ -135,8 +135,7 @@ script:
 ```
 
 ### Example of validating WordPress PHP coding standards 
-1. Copy spec/ folder from this repo into your repo root
-2. Add this into your .travis.yml
+1. Add this into your .travis.yml
 
 ```yaml
 # This uses newer and faster docker based build system
